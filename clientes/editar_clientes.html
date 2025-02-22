@@ -60,6 +60,7 @@
       border-radius: 32px;
       margin: auto;
     }
+    
     .logo::after {
       content: "";
       position: absolute;
@@ -303,35 +304,61 @@
         margin-left: 0;
       }
     }
+
+    .menu-item.nested {
+  margin-left: 0;
+}
+
+.menu-item.nested .menu-header {
+  padding: 8px 20px 8px 35px;
+  font-size: 0.9rem;
+}
+
+.menu-item.nested .submenu {
+  margin-left: 35px;
+}
+
+.menu-item.nested .menu-header:hover {
+  background-color: #f5f5f5;
+}
+
+.menu-item.nested.active > .menu-header {
+  background-color: rgba(46, 125, 50, 0.1);
+  border-left: 3px solid var(--primary);
+  color: var(--primary);
+}
+    
   </style>
 </head>
 <body>
   <!-- Sidebar Menu -->
   <div class="sidebar">
     <div class="sidebar-header">
-      <img class="logo" src="../logo.jpg"></img>
-    </div>
+        <img class="logo" src="../logo.jpg"></img>
+      </div>
     <ul class="sidebar-menu">
       <!-- Funcionarios Menu -->
       <li class="menu-item">
         <div class="menu-header">
           <span>Funcionarios</span>
-          <span class="arrow">▼</span>
+          <span class="arrow">▲</span>
         </div>
         <ul class="submenu">
           <li><a href="#" class="submenu-item">Cadastrar Funcionario</a></li>
           <li><a href="#" class="submenu-item">Listar Funcionario</a></li>
+          <li><a href="#" class="submenu-item">Alocar Cargo</a></li>
+          <li><a href="#" class="submenu-item">Alocar Tarefa</a></li>
         </ul>
       </li>
       
-      <!-- Fornecedores Menu -->
-      <li class="menu-item">
+      <!-- Fornecedores Menu - Active -->
+      <li class="menu-item ">
         <div class="menu-header">
           <span>Fornecedores</span>
-          <span class="arrow">▲</span>
+          <span class="arrow">▼</span>
         </div>
-        <ul class="submenu">
-          <li><a href="#" class="submenu-item">Cadastrar Fornecedores</a></li>
+        <ul class="submenu open">
+          <li><a href="#" class="submenu-item">Editar Fornecedor</a></li>
           <li><a href="#" class="submenu-item">Listar Fornecedores</a></li>
         </ul>
       </li>
@@ -342,8 +369,8 @@
           <span>Clientes</span>
           <span class="arrow">▼</span>
         </div>
-        <ul class="submenu open">
-          <li><a href="#" class="submenu-item active">Cadastrar Cliente</a></li>
+        <ul class="submenu">
+          <li><a href="#" class="submenu-item active">Editar Clientes</a></li>
           <li><a href="#" class="submenu-item">Listar Clientes</a></li>
         </ul>
       </li>
@@ -367,25 +394,23 @@
           <span class="arrow">▲</span>
         </div>
         <ul class="submenu">
-          <!-- Grão submenu -->
-          <li class="nested-menu-item">
-            <div class="nested-menu-header">
+          <li class="menu-item nested">
+            <div class="menu-header">
               <span>Grão</span>
               <span class="arrow">▲</span>
             </div>
-            <ul class="nested-submenu">
+            <ul class="submenu">
               <li><a href="#" class="submenu-item">Cadastrar Grão</a></li>
               <li><a href="#" class="submenu-item">Listar Grão</a></li>
             </ul>
           </li>
           
-          <!-- Fertilizante submenu -->
-          <li class="nested-menu-item">
-            <div class="nested-menu-header">
+          <li class="menu-item nested">
+            <div class="menu-header">
               <span>Fertilizante</span>
               <span class="arrow">▲</span>
             </div>
-            <ul class="nested-submenu">
+            <ul class="submenu">
               <li><a href="#" class="submenu-item">Cadastrar Fertilizante</a></li>
               <li><a href="#" class="submenu-item">Listar Fertilizante</a></li>
             </ul>
@@ -416,15 +441,14 @@
         </ul>
       </li>
 
-
       <li class="menu-item">
         <div class="menu-header">
           <span>Tarefa</span>
           <span class="arrow">▲</span>
         </div>
         <ul class="submenu">
-          <li><a href="#" class="submenu-item">Cadastrar Tarefa</a></li>
-          <li><a href="#" class="submenu-item">Alocar Tarefa</a></li>
+          <li><a href="#" class="submenu-item">Cadastrar Safra</a></li>
+          <li><a href="#" class="submenu-item">Listar Safra</a></li>
         </ul>
       </li>
     </ul>
@@ -433,12 +457,12 @@
   <div class="main-content">
     <div class="top-bar">
       <div class="breadcrumb">
-        Clientes / <span class="breadcrumb-active">Cadastrar Cliente</span>
+        Clientes / <span class="breadcrumb-active">Editar Cliente</span>
       </div>
     </div>
     
     <div class="card">
-      <h1 style="font-size: 32px;">Cadastrar Cliente</h1>
+      <h1 style="font-size: 32px;">Editar Cliente</h1>
       
       <form>
         <div class="form-grid">
@@ -446,17 +470,17 @@
           <h3 class="address-title">Informações básicas</h3>
           <div class="form-group">
             <label for="name">Nome Completo *</label>
-            <input type="text" id="name" required placeholder="Digite o nome completo">
+            <input type="text" value="Ana Lucia da Silva Montes" id="name" required placeholder="Digite o nome completo">
           </div>
           
           <div class="form-group">
             <label for="document">Documento (CPF/CNPJ) *</label>
-            <input type="text" id="document" required placeholder="Digite CPF ou CNPJ">
+            <input type="text" value="921.957.820-48" id="document" required placeholder="Digite CPF ou CNPJ">
           </div>
           
           <div class="form-group">
             <label for="razao-social">Razão Social *</label>
-            <input type="text" id="razao-social" required placeholder="Digite a razão social">
+            <input type="text" value="Stella Joalheria ME" id="razao-social" required placeholder="Digite a razão social">
           </div>
           
         </div>
@@ -464,17 +488,17 @@
           <!-- Personal Information -->
           <div class="form-group" style="width: 50%;">
             <label for="telephone">Telefone *</label>
-            <input type="tel" id="telephone" required placeholder="(00) 00000-0000">
+            <input type="tel" value="(11) 98301-9191" id="telephone" required placeholder="(00) 00000-0000">
           </div>
           
           <div class="form-group" style="width: 70%;">
             <label for="email">Email *</label>
-            <input type="email" id="email" required placeholder="exemplo@email.com">
+            <input type="email" value="www.kaiqueeste.com.br" id="email" required placeholder="exemplo@email.com">
           </div>
 
           <div class="form-group" style="width: 100%;">
             <label for="empresa">Empresa *</label>
-            <input type="text" id="empresa" required placeholder="Digite o nome da empresa">
+            <input type="text" value="Stella Joalheria ME" id="empresa" required placeholder="Digite o nome da empresa">
           </div>
           
           <!-- Address Section -->
@@ -484,14 +508,14 @@
               
               <div class="form-group">
                 <label for="zipcode">CEP *</label>
-                <input type="text" id="zipcode" required placeholder="Digite o CEP">
+                <input type="text" value="05132-210" id="zipcode" required placeholder="Digite o CEP">
               </div>
               
               <div class="form-group">
                 <label for="state">Estado *</label>
                 <select id="state" required>
                   <option value="" disabled selected>Selecione o estado</option>
-                  <option value="SP">São Paulo</option>
+                  <option selected value="SP">São Paulo</option>
                   <option value="RJ">Rio de Janeiro</option>
                   <option value="MG">Minas Gerais</option>
                 </select>
@@ -499,17 +523,17 @@
               
               <div class="form-group">
                 <label for="city">Cidade *</label>
-                <input type="text" id="city" required placeholder="Digite a cidade">
+                <input type="text" value="São Paulo" id="city" required placeholder="Digite a cidade">
               </div>
               
               <div class="form-group">
                 <label for="neighborhood">Bairro *</label>
-                <input type="text" id="neighborhood" required placeholder="Digite o bairro">
+                <input type="text" value="Liberdade" id="neighborhood" required placeholder="Digite o bairro">
               </div>
               
               <div class="form-group" style="grid-column: span 2; width: 60%;">
                 <label for="street">Logradouro *</label>
-                <input type="text" id="street" required placeholder="Digite o logradouro">
+                <input type="text" value="Rua Carlo Perinello" id="street" required placeholder="Digite o logradouro">
               </div>
             </div>
           </div>
@@ -524,27 +548,34 @@
   </div>
   
   <script>
-    // Toggle menu functionality
     document.addEventListener('DOMContentLoaded', function() {
-      // Get all menu items with submenu
-      const menuItems = document.querySelectorAll('.menu-item');
-      
-      menuItems.forEach(item => {
-        const menuHeader = item.querySelector('.menu-header');
-        if (menuHeader) {
-          menuHeader.addEventListener('click', function() {
-            // Toggle expanded class
-            item.classList.toggle('expanded');
-            
-            // Toggle submenu visibility
-            const submenu = this.nextElementSibling;
-            if (submenu && submenu.classList.contains('submenu')) {
-              submenu.classList.toggle('open');
-            }
-          });
+    // Function to handle menu toggling
+    function toggleMenu(menuItem, isNested = false) {
+      menuItem.classList.toggle('expanded');
+      const submenu = menuItem.querySelector('.submenu');
+      if (submenu) {
+        submenu.classList.toggle('open');
+        
+        // Update arrow
+        const arrow = menuItem.querySelector('.arrow');
+        if (arrow) {
+          arrow.textContent = menuItem.classList.contains('expanded') ? '▼' : '▲';
         }
-      });
+      }
+    }
+  
+    // Handle all menu items (including nested)
+    document.querySelectorAll('.menu-item').forEach(item => {
+      const menuHeader = item.querySelector('.menu-header');
+      if (menuHeader) {
+        menuHeader.addEventListener('click', (e) => {
+          e.stopPropagation(); // Prevent event bubbling
+          const isNested = item.classList.contains('nested');
+          toggleMenu(item, isNested);
+        });
+      }
     });
+  });
   </script>
 </body>
 </html>
