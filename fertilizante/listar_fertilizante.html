@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fazenda+</title>
+  <!-- Adicionando Font Awesome para os ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    label{
+      font-weight: bold;
+    }
+    :root {
+      --primary: #2e7d32;
+      --primary-light: #4caf50;
+      --secondary: #f5f5f5;
+      --text: #333;
+      --error: #e53935;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f9f9;
+      color: var(--text);
+      line-height: 1.4;
+      display: flex;
+    }
+    
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: white;
+      box-shadow: 1px 0 5px rgba(0,0,0,0.1);
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 10;
+      padding-top: 15px;
+      overflow-y: auto;
+    }
+    
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      padding: 0 20px 15px 20px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .logo {
+      width: 32px;
+      height: 32px;
+      background-color: var(--primary);
+      border-radius: 6px;
+      margin-right: 10px;
+      position: relative;
+    }
+    
+    .logo::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px;
+      height: 16px;
+      border: 2px solid white;
+      border-radius: 3px;
+    }
+    
+    .sidebar-menu {
+      list-style: none;
+      margin-top: 20px;
+    }
+    
+    .menu-item {
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .menu-item > .menu-header {
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .menu-item > .menu-header:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .menu-item.active > .menu-header {
+      background-color: rgba(46, 125, 50, 0.1);
+      border-left: 3px solid var(--primary);
+      color: var(--primary);
+    }
+    
+    .submenu {
+      list-style: none;
+      margin-left: 15px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    
+    .submenu.open {
+      max-height: 500px;
+    }
+    
+    .submenu-item {
+      padding: 8px 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+    }
+    
+    .submenu-item:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .submenu-item.active {
+      background-color: rgba(46, 125, 50, 0.05);
+      color: var(--primary);
+      font-weight: 500;
+    }
+    
+    .arrow {
+      font-size: 0.7rem;
+      transition: transform 0.3s;
+    }
+    
+    .menu-item.expanded .arrow {
+      transform: rotate(180deg);
+    }
+    
+    /* Styles for nested menu support */
+    .nested-menu-item {
+      margin-left: 15px;
+    }
+    
+    .nested-menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    
+    .nested-menu-header:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .nested-submenu {
+      list-style: none;
+      margin-left: 10px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    
+    .nested-submenu.open {
+      max-height: 200px;
+    }
+    
+    .nested-menu-item.expanded .arrow {
+      transform: rotate(180deg);
+    }
+    
+    .main-content {
+      margin-left: 250px;
+      flex-grow: 1;
+      padding: 12px;
+    }
+    
+    .top-bar {
+      background-color: white;
+      padding: 10px 15px;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .breadcrumb {
+      font-size: 0.9rem;
+    }
+    
+    .breadcrumb-active {
+      color: var(--primary);
+      font-weight: 500;
+    }
+    
+    .card {
+      background-color: white;
+      border-radius: 6px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+      padding: 18px;
+    }
+    
+    h1 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+    
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .form-group {
+      margin-bottom: 12px;
+    }
+    
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+    
+    .address-section {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    
+    @media (max-width: 768px) {
+      .address-section {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .address-section {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .address-title {
+      grid-column: 1 / -1;
+      font-size: 0.95rem;
+      margin: 5px 0;
+      color: var(--primary);
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 0.8rem;
+      color: #555;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+    }
+    
+    .btn-container {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-secondary {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #e0e0e0;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: #1b5e20;
+    }
+
+    .btn-danger {
+      background-color: var(--error);
+      color: white;
+    }
+    
+    .btn-danger:hover {
+      background-color: #b71c1c;
+    }
+    
+    @media (max-width: 992px) {
+      body {
+        display: block;
+      }
+      
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      
+      .main-content {
+        margin-left: 0;
+      }
+    }
+    
+    /* Estilos adicionais para a tabela de funcionários */
+    .employee-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    
+    .employee-table th {
+      background-color: var(--primary);
+      color: white;
+      text-align: left;
+      padding: 10px;
+      font-weight: 500;
+    }
+    
+    .employee-table td {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .employee-table tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+    
+    .employee-table tr:hover {
+      background-color: rgba(76, 175, 80, 0.05);
+    }
+    
+    .search-bar {
+      display: flex;
+      margin-bottom: 15px;
+      gap: 10px;
+    }
+    
+    .search-bar input {
+      flex-grow: 1;
+    }
+    
+    .action-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--primary);
+      font-size: 1rem;
+      padding: 5px 8px;
+      margin: 0 3px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    
+    .action-btn:hover {
+      background-color: rgba(76, 175, 80, 0.1);
+    }
+    
+    .action-btn.edit-btn:hover {
+      color: #1b5e20;
+    }
+    
+    .action-btn.delete-btn {
+      color: var(--error);
+    }
+    
+    .action-btn.delete-btn:hover {
+      color: #b71c1c;
+      background-color: rgba(229, 57, 53, 0.1);
+    }
+    
+    .pagination {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 15px;
+      gap: 5px;
+    }
+    
+    .page-btn {
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+      background-color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    
+    .page-btn.active {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    
+    .page-btn:hover:not(.active) {
+      background-color: #f5f5f5;
+    }
+    
+    .action-cell {
+      width: 100px;
+      text-align: center;
+    }
+    
+    /* Modal styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+      transform: translateY(-20px);
+      transition: all 0.3s ease;
+    }
+    
+    .modal-overlay.active .modal-container {
+      transform: translateY(0);
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--error);
+    }
+    
+    .modal-close {
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #777;
+      transition: color 0.2s;
+    }
+    
+    .modal-close:hover {
+      color: #333;
+    }
+    
+    .modal-body {
+      margin-bottom: 20px;
+    }
+    
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo"></div>
+      <span>Fazenda+</span>
+    </div>
+    <ul class="sidebar-menu">
+      <!-- Funcionarios Menu -->
+      <li class="menu-item">
+        <div class="menu-header">
+          <span>Funcionarios</span>
+          <span class="arrow">▲</span>
+        </div>
+        <ul class="submenu open">
+          <li><a href="#" class="submenu-item">Cadastrar Funcionário</a></li>
+          <li><a href="#" class="submenu-item">Listar Funcionários</a></li>
+        </ul>
+      </li>
+      
+      <!-- Fornecedores Menu -->
+      <li class="menu-item">
+        <div class="menu-header">
+          <span>Fornecedores</span>
+          <span class="arrow">▼</span>
+        </div>
+        <ul class="submenu">
+          <li><a href="#" class="submenu-item">Cadastrar Fornecedores</a></li>
+          <li><a href="#" class="submenu-item">Listar Fornecedores</a></li>
+        </ul>
+      </li>
+      
+      <!-- Clientes Menu -->
+      <li class="menu-item">
+        <div class="menu-header">
+          <span>Clientes</span>
+          <span class="arrow">▼</span>
+        </div>
+        <ul class="submenu">
+          <li><a href="#" class="submenu-item">Cadastrar Cliente</a></li>
+          <li><a href="#" class="submenu-item">Listar Clientes</a></li>
+        </ul>
+      </li>
+      
+      <!-- Areas Menu -->
+      <li class="menu-item">
+        <div class="menu-header">
+          <span>Areas</span>
+          <span class="arrow">▼</span>
+        </div>
+        <ul class="submenu">
+          <li><a href="#" class="submenu-item">Cadastrar Area</a></li>
+          <li><a href="#" class="submenu-item">Listar Areas</a></li>
+        </ul>
+      </li>
+      
+      <!-- Fixed Produtos Menu with nested submenus -->
+      <li class="menu-item active">
+        <div class="menu-header">
+          <span>Produtos</span>
+          <span class="arrow">▲</span>
+        </div>
+        <ul class="submenu active">
+          <!-- Grão submenu -->
+          <li class="nested-menu-item">
+            <div class="nested-menu-header">
+              <span>Grão</span>
+              <span class="arrow">▼</span>
+            </div>
+            <ul class="nested-submenu">
+              <li><a href="#" class="submenu-item active">Cadastrar Grão</a></li>
+              <li><a href="#" class="submenu-item">Listar Grão</a></li>
+            </ul>
+          </li>
+          
+          <!-- Fertilizante submenu -->
+          <li class="nested-menu-item">
+            <div class="nested-menu-header">
+              <span>Fertilizante</span>
+              <span class="arrow">▼</span>
+            </div>
+            <ul class="nested-submenu">
+              <li><a href="#" class="submenu-item">Cadastrar Fertilizante</a></li>
+              <li><a href="#" class="submenu-item">Listar Fertilizante</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      
+      <!-- Safra Menu -->
+      <li class="menu-item">
+        <div class="menu-header">
+          <span>Safra</span>
+          <span class="arrow">▼</span>
+        </div>
+        <ul class="submenu">
+          <li><a href="#" class="submenu-item">Cadastrar Safra</a></li>
+          <li><a href="#" class="submenu-item">Listar Safra</a></li>
+        </ul>
+      </li>
+
+      <li class="menu-item">
+        <div class="menu-header">
+          <span>Cargo</span>
+          <span class="arrow">▼</span>
+        </div>
+        <ul class="submenu">
+          <li><a href="#" class="submenu-item">Cadastrar Cargo</a></li>
+          <li><a href="#" class="submenu-item">Alocar Cargo</a></li>
+        </ul>
+      </li>
+
+      <li class="menu-item">
+        <div class="menu-header">
+          <span>Tarefa</span>
+          <span class="arrow">▼</span>
+        </div>
+        <ul class="submenu">
+          <li><a href="#" class="submenu-item">Cadastrar Tarefa</a></li>
+          <li><a href="#" class="submenu-item">Alocar Tarefa</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="top-bar">
+      <div class="breadcrumb">
+        Fertilizante / <span class="breadcrumb-active">Listar Fertilizantes</span>
+      </div>
+      <div>
+        <button class="btn btn-primary">Novo Fertilizante</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h1 style="font-size: 32px;">Listar Fertilizantes</h1>
+      
+      <div class="search-bar">
+        <input type="text" placeholder="Buscar fertilizante...">
+        <button class="btn btn-secondary">Buscar</button>
+      </div>
+      
+      <table class="employee-table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Composição</th>
+            <th>Tempo de utilização</th>
+            <th>Estado Físico</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>macronutrientes, micronutrientes e resíduos orgânicos</td>
+            <td>10</td>
+            <td>Sólido</td>
+            <td class="action-cell">
+              <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
+              <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>macronutrientes, micronutrientes e resíduos orgânicos</td>
+            <td>40</td>
+            <td>Líquido</td>
+            <td class="action-cell">
+              <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
+              <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>macronutrientes, micronutrientes e resíduos orgânicos</td>
+            <td>22</td>
+            <td>Sólido</td>
+            <td class="action-cell">
+              <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
+              <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>macronutrientes, micronutrientes e resíduos orgânicos</td>
+            <td>17</td>
+            <td>Sólido</td>
+            <td class="action-cell">
+              <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
+              <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="pagination">
+        <button class="page-btn">«</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">»</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete confirmation modal -->
+  <div id="deleteModal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Confirmação da operação de exclusão</h3>
+        <span class="modal-close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>Deseja excluir o fertilizante <span id="deleteItemId"></span>?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="cancelDeleteBtn" class="btn btn-secondary">Cancelar</button>
+        <button id="confirmDeleteBtn" class="btn btn-danger">Sim</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript para interatividade da página
+    document.addEventListener('DOMContentLoaded', function() {
+      // Função para alternar os submenus
+      const menuItems = document.querySelectorAll('.menu-item');
+      menuItems.forEach(item => {
+        const menuHeader = item.querySelector('.menu-header');
+        if (menuHeader) {
+          menuHeader.addEventListener('click', () => {
+            const submenu = item.querySelector('.submenu');
+            if (submenu) {
+              item.classList.toggle('expanded');
+              submenu.classList.toggle('open');
+              
+              // Toggle arrow direction
+              const arrow = menuHeader.querySelector('.arrow');
+              if (arrow) {
+                arrow.textContent = item.classList.contains('expanded') ? '▲' : '▼';
+              }
+            }
+          });
+        }
+      });
+      
+      // Add nested submenu toggle functionality
+      const nestedMenuItems = document.querySelectorAll('.nested-menu-item');
+      nestedMenuItems.forEach(item => {
+        const nestedMenuHeader = item.querySelector('.nested-menu-header');
+        if (nestedMenuHeader) {
+          nestedMenuHeader.addEventListener('click', (e) => {
+            // Prevent the click from bubbling up to parent menu
+            e.stopPropagation();
+            
+            const nestedSubmenu = item.querySelector('.nested-submenu');
+            if (nestedSubmenu) {
+              item.classList.toggle('expanded');
+              nestedSubmenu.classList.toggle('open');
+              
+              // Toggle arrow direction
+              const arrow = nestedMenuHeader.querySelector('.arrow');
+              if (arrow) {
+                arrow.textContent = item.classList.contains('expanded') ? '▲' : '▼';
+              }
+            }
+          });
+        }
+      });
+      
+      // Função de busca para filtragem de funcionários
+      const searchInput = document.querySelector('.search-bar input');
+      const searchButton = document.querySelector('.search-bar button');
+      const tableRows = document.querySelectorAll('.employee-table tbody tr');
+      
+      if (searchButton && searchInput) {
+        searchButton.addEventListener('click', () => {
+          const searchTerm = searchInput.value.toLowerCase();
+          
+          tableRows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            if (text.includes(searchTerm)) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        });
+        
+        // Permitir busca ao pressionar Enter
+        searchInput.addEventListener('keyup', (e) => {
+          if (e.key === 'Enter') {
+            searchButton.click();
+          }
+        });
+      }
+      
+      // Modal elements
+      const deleteModal = document.getElementById('deleteModal');
+      const deleteItemIdSpan = document.getElementById('deleteItemId');
+      const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+      const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+      const closeModalBtn = document.querySelector('.modal-close');
+      
+      // Variable to store the current row for deletion
+      let currentDeleteRow = null;
+      
+      // Function to open the modal
+      function openDeleteModal(id, row) {
+        deleteItemIdSpan.textContent = 1;
+        currentDeleteRow = row;
+        deleteModal.classList.add('active');
+      }
+      
+      // Function to close the modal
+      function closeDeleteModal() {
+        deleteModal.classList.remove('active');
+        currentDeleteRow = null;
+      }
+      
+      // Add event listeners for delete buttons
+      const deleteButtons = document.querySelectorAll('.delete-btn');
+      deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const row = this.closest('tr');
+          const id = row.cells[0].textContent;
+          const name = row.cells[1].textContent;
+          openDeleteModal(name, row);
+        });
+      });
+      
+      // Add event listener for confirm delete button
+      confirmDeleteBtn.addEventListener('click', function() {
+        if (currentDeleteRow) {
+          const id = currentDeleteRow.cells[0].textContent;
+          
+          // Aqui seria feita a requisição para o backend
+          // Para demonstração, vamos apenas fazer a remoção visual
+          currentDeleteRow.style.opacity = '0.5';
+          setTimeout(() => {
+            currentDeleteRow.remove();
+          }, 500);
+          
+          // Alerta de sucesso (seria substituído por uma notificação mais elegante)
+          alert(`Área ${id} excluída com sucesso!`);
+          
+          // Close the modal
+          closeDeleteModal();
+        }
+      });
+      
+      // Add event listeners to close the modal
+      cancelDeleteBtn.addEventListener('click', closeDeleteModal);
+      closeModalBtn.addEventListener('click', closeDeleteModal);
+      
+      // Close modal if clicked outside
+      deleteModal.addEventListener('click', function(e) {
+        if (e.target === deleteModal) {
+          closeDeleteModal();
+        }
+      });
+      
+      // Funcionalidade para botões de edição
+      const editButtons = document.querySelectorAll('.edit-btn');
+      editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const row = this.closest('tr');
+          const id = row.cells[0].textContent;
+          alert(`Editando área: ${id}`);
+        });
+      });
+      
+      // Funcionalidade para paginação
+      const pageButtons = document.querySelectorAll('.page-btn');
+      pageButtons.forEach(button => {
+        if (!button.classList.contains('active')) {
+          button.addEventListener('click', function() {
+            document.querySelector('.page-btn.active').classList.remove('active');
+            this.classList.add('active');
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
