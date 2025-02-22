@@ -53,12 +53,14 @@
     }
     
     .logo {
-      width: 32px;
-      height: 32px;
+      width: 194px;
+      height: 110px;
       background-color: var(--primary);
       border-radius: 6px;
       margin-right: 10px;
       position: relative;
+      border-radius: 32px;
+      margin: auto;
     }
     
     .logo::after {
@@ -443,7 +445,7 @@
     }
     
     .action-cell {
-      width: 100px;
+      width: 160px;
       text-align: center;
     }
     
@@ -524,8 +526,7 @@
 <body>
   <div class="sidebar">
     <div class="sidebar-header">
-      <div class="logo"></div>
-      <span>Fazenda+</span>
+      <img class="logo" src="../logo.jpg"></img>
     </div>
     <ul class="sidebar-menu">
       <!-- Funcionarios Menu -->
@@ -670,7 +671,7 @@
             <th>Composição</th>
             <th>Tempo de utilização</th>
             <th>Estado Físico</th>
-            <th>Ações</th>
+            <th style="text-align: center;">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -680,6 +681,7 @@
             <td>10</td>
             <td>Sólido</td>
             <td class="action-cell">
+              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
               <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
               <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
             </td>
@@ -690,6 +692,7 @@
             <td>40</td>
             <td>Líquido</td>
             <td class="action-cell">
+              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
               <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
               <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
             </td>
@@ -700,6 +703,7 @@
             <td>22</td>
             <td>Sólido</td>
             <td class="action-cell">
+              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
               <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
               <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
             </td>
@@ -710,6 +714,7 @@
             <td>17</td>
             <td>Sólido</td>
             <td class="action-cell">
+              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
               <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
               <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
             </td>
