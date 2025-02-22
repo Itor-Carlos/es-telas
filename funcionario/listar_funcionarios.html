@@ -53,12 +53,14 @@
     }
     
     .logo {
-      width: 32px;
-      height: 32px;
+      width: 194px;
+      height: 110px;
       background-color: var(--primary);
       border-radius: 6px;
       margin-right: 10px;
       position: relative;
+      border-radius: 32px;
+      margin: auto;
     }
     
     .logo::after {
@@ -409,7 +411,7 @@
     }
     
     .action-cell {
-      width: 100px;
+      width: 160px;
       text-align: center;
     }
     
@@ -490,8 +492,7 @@
 <body>
   <div class="sidebar">
     <div class="sidebar-header">
-      <div class="logo"></div>
-      <span>Fazenda+</span>
+      <img class="logo" src="../logo.jpg"></img>
     </div>
     <ul class="sidebar-menu ">
       <!-- Funcionarios Menu -->
@@ -626,7 +627,7 @@
       <h1 style="font-size: 32px;">Listar Funcionários</h1>
       
       <div class="search-bar">
-        <input type="text" placeholder="Buscar funcionário...">
+        <input type="text" placeholder="Buscar funcionário (CPF/CNPJ)...">
         <button class="btn btn-secondary">Buscar</button>
       </div>
       
@@ -639,7 +640,7 @@
             <th>Telefone</th>
             <th>Email</th>
             <th>Data Contratação</th>
-            <th>Ações</th>
+            <th style="text-align: center;">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -651,6 +652,7 @@
             <td>ana.silva@empresa.com</td>
             <td>15/03/2021</td>
             <td class="action-cell">
+              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
               <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
               <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
             </td>
@@ -663,6 +665,7 @@
             <td>carlos.oliveira@empresa.com</td>
             <td>22/06/2022</td>
             <td class="action-cell">
+              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
               <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
               <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
             </td>
@@ -675,6 +678,7 @@
             <td>mariana.santos@empresa.com</td>
             <td>10/01/2023</td>
             <td class="action-cell">
+              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
               <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
               <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
             </td>
@@ -687,6 +691,7 @@
             <td>pedro.costa@empresa.com</td>
             <td>05/08/2022</td>
             <td class="action-cell">
+              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
               <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
               <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
             </td>
@@ -699,6 +704,7 @@
             <td>juliana.ferreira@empresa.com</td>
             <td>18/11/2021</td>
             <td class="action-cell">
+              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
               <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
               <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
             </td>
@@ -711,6 +717,7 @@
             <td>roberto.almeida@empresa.com</td>
             <td>07/04/2022</td>
             <td class="action-cell">
+              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
               <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
               <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
             </td>
@@ -723,6 +730,7 @@
             <td>fernanda.lima@empresa.com</td>
             <td>29/09/2021</td>
             <td class="action-cell">
+              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
               <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
               <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
             </td>
