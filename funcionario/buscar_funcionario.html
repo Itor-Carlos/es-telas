@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fazenda+</title>
+  <title>Fazenda+ | Buscar Funcionário</title>
   <style>
     label{
       font-weight: bold;
@@ -304,14 +304,168 @@
         margin-left: 0;
       }
     }
+
+    :root {
+      --primary: #2e7d32;
+      --primary-light: #4caf50;
+      --secondary: #f5f5f5;
+      --text: #333;
+      --error: #e53935;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f9f9;
+      color: var(--text);
+      line-height: 1.4;
+      display: flex;
+    }
+    
+    /* Reusing all the sidebar and main content styles */
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: white;
+      box-shadow: 1px 0 5px rgba(0,0,0,0.1);
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 10;
+      padding-top: 15px;
+      overflow-y: auto;
+    }
+    
+    .main-content {
+      margin-left: 250px;
+      flex-grow: 1;
+      padding: 12px;
+    }
+
+    /* Search specific styles */
+    .search-container {
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+
+    .search-filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      border: 1px solid var(--primary);
+      border-radius: 20px;
+      background: white;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .employee-card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .employee-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .employee-name {
+      font-size: 1.2rem;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .employee-status {
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-size: 0.9rem;
+    }
+
+    .status-active {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .info-item {
+      margin-bottom: 10px;
+    }
+
+    .info-label {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    .info-value {
+      font-size: 0.95rem;
+    }
+
+    .address-section {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Sidebar Menu -->
   <div class="sidebar">
     <div class="sidebar-header">
-      <img class="logo" src="../logo.jpg"></img>
-    </div>
+        <img class="logo" src="../logo.jpg"></img>
+      </div>
     <ul class="sidebar-menu">
       <!-- Funcionarios Menu -->
       <li class="menu-item expanded active">
@@ -430,114 +584,89 @@
       </li>
     </ul>
   </div>
-  <!-- Main Content -->
+
   <div class="main-content">
     <div class="top-bar">
       <div class="breadcrumb">
-        Funcionários / <span class="breadcrumb-active">Cadastrar Funcionário</span>
+        Funcionários / <span class="breadcrumb-active">Visualizar Funcionário</span>
       </div>
     </div>
-    
+
     <div class="card">
-      <h1 style="font-size: 32px;">Cadastrar Funcionário</h1>
+      <h1 style="font-size: 32px;">Visualizar Funcionário</h1>
       
-      <form>
-        <div class="form-grid">
-
-          <h3 class="address-title">Informações básicas</h3>
-          <div class="form-group">
-            <label for="name">Nome Completo *</label>
-            <input type="text" id="name" required placeholder="Digite o nome completo">
-          </div>
-          
-          <div class="form-group">
-            <label for="document">Documento (CPF/CNPJ) *</label>
-            <input type="text" id="document" required placeholder="Digite CPF ou CNPJ">
-          </div>
-          
-          <div class="form-group">
-            <label for="email">Email *</label>
-            <input type="email" id="email" required placeholder="exemplo@email.com">
-          </div>
-          
+      <!-- Example of an employee card -->
+      <div class="employee-card">
+        <div class="employee-header">
+          <h2 class="employee-name">João Silva Santos</h2>
+          <span class="employee-status status-active">Ativo</span>
         </div>
-        <div class="form-grid">
-          <!-- Personal Information -->
-          <div class="form-group" style="width: 50%;">
-            <label for="telephone">Telefone *</label>
-            <input type="tel" id="telephone" required placeholder="(00) 00000-0000">
-          </div>
-          
-          <div class="form-group" style="width: 50%;">
-            <label for="hiring-date">Data de Contratação *</label>
-            <input type="date" id="hiring-date" required>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">Documento (CPF/CNPJ)</div>
+            <div class="info-value">123.456.789-00</div>
           </div>
 
-          <div class="form-group" id="status_field" style="width: 50%;">
-            <label for="status">Status *</label>
-            <input type="text" id="status" required>
+          <div class="info-item">
+            <div class="info-label">Email</div>
+            <div class="info-value">joao.silva@email.com</div>
           </div>
-          
-          <!-- Address Section -->
-          <div class="form-group full-width">
-            <div class="address-section">
-              <h3 class="address-title">Informações de Endereço</h3>
-              
-              <div class="form-group">
-                <label for="zipcode">CEP *</label>
-                <input type="text" id="zipcode" required placeholder="Digite o CEP">
-              </div>
-              
-              <div class="form-group">
-                <label for="state">Estado *</label>
-                <select id="state" required>
-                  <option value="" disabled selected>Selecione o estado</option>
-                  <option value="SP">São Paulo</option>
-                  <option value="RJ">Rio de Janeiro</option>
-                  <option value="MG">Minas Gerais</option>
-                </select>
-              </div>
-              
-              <div class="form-group">
-                <label for="city">Cidade *</label>
-                <input type="text" id="city" required placeholder="Digite a cidade">
-              </div>
-              
-              <div class="form-group">
-                <label for="neighborhood">Bairro *</label>
-                <input type="text" id="neighborhood" required placeholder="Digite o bairro">
-              </div>
-              
-              <div class="form-group" style="grid-column: span 2; width: 60%;">
-                <label for="street">Logradouro *</label>
-                <input type="text" id="street" required placeholder="Digite o logradouro">
-              </div>
+
+          <div class="info-item">
+            <div class="info-label">Telefone</div>
+            <div class="info-value">(11) 98765-4321</div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-label">Data de Contratação</div>
+            <div class="info-value">15/01/2024</div>
+          </div>
+        </div>
+
+        <div class="address-section">
+          <h3 class="section-title">Endereço</h3>
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-label">CEP</div>
+              <div class="info-value">12345-678</div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-label">Estado</div>
+              <div class="info-value">São Paulo</div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-label">Cidade</div>
+              <div class="info-value">São Paulo</div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-label">Bairro</div>
+              <div class="info-value">Centro</div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-label">Logradouro</div>
+              <div class="info-value">Avenida Paulista, 1000</div>
             </div>
           </div>
         </div>
-        
-        <div class="btn-container">
-          <button type="submit" class="btn btn-primary">Salvar</button>
-          <button type="button" class="btn btn-secondary">Cancelar</button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
-  
+
   <script>
-    // Toggle menu functionality
     document.addEventListener('DOMContentLoaded', function() {
-      // Get all menu items with submenu
       const menuItems = document.querySelectorAll('.menu-item');
       
       menuItems.forEach(item => {
         const menuHeader = item.querySelector('.menu-header');
         if (menuHeader) {
           menuHeader.addEventListener('click', function() {
-            // Toggle expanded class
             item.classList.toggle('expanded');
             
-            // Toggle submenu visibility
             const submenu = this.nextElementSibling;
             if (submenu && submenu.classList.contains('submenu')) {
               submenu.classList.toggle('open');
