@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device=width, initial-scale=1.0">
   <title>Fazenda+</title>
   <!-- Adicionando Font Awesome para os ícones -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -411,7 +411,7 @@
     }
     
     .action-cell {
-      width: 160px;
+      width: 100px;
       text-align: center;
     }
     
@@ -520,14 +520,14 @@
       </li>
       
       <!-- Clientes Menu -->
-      <li class="menu-item active">
+      <li class="menu-item">
         <div class="menu-header">
           <span>Clientes</span>
           <span class="arrow">▲</span>
         </div>
         <ul class="submenu">
           <li><a href="#" class="submenu-item">Cadastrar Cliente</a></li>
-          <li><a href="#" class="submenu-item active">Listar Clientes</a></li>
+          <li><a href="#" class="submenu-item">Listar Clientes</a></li>
         </ul>
       </li>
       
@@ -595,10 +595,10 @@
           <span class="arrow">▲</span>
         </div>
         <ul class="submenu">
-          <li><a href="../pedido/cadastrar_pedido_cliente.html" class="submenu-item">Cadastrar Pedido Cliente</a></li>
-          <li><a href="../pedido/listar_pedido_cliente.html" class="submenu-item">Listar Pedidos Cliente</a></li>
-          <li><a href="../pedido/cadastrar_pedido_fornecedor.html" class="submenu-item">Cadastrar Pedido Fornecedor</a></li>
-          <li><a href="../pedido/listar_pedido_fornecedor.html" class="submenu-item">Listar Pedidos Fornecedor</a></li>
+          <li><a href="cadastrar_pedido_cliente.html" class="submenu-item">Cadastrar Pedido Cliente</a></li>
+          <li><a href="listar_pedido_cliente.html" class="submenu-item">Listar Pedidos Cliente</a></li>
+          <li><a href="cadastrar_pedido_fornecedor.html" class="submenu-item">Cadastrar Pedido Fornecedor</a></li>
+          <li><a href="listar_pedido_fornecedor.html" class="submenu-item">Listar Pedidos Fornecedor</a></li>
         </ul>
       </li>
 
@@ -630,18 +630,18 @@
   <div class="main-content">
     <div class="top-bar">
       <div class="breadcrumb">
-        Clientes / <span class="breadcrumb-active">Listar Clientes</span>
+        Pedidos / <span class="breadcrumb-active">Listar Pedidos do Cliente</span>
       </div>
       <div>
-        <button class="btn btn-primary">Novo Cliente</button>
+        <button class="btn btn-primary">Novo Pedido</button>
       </div>
     </div>
 
     <div class="card">
-      <h1 style="font-size: 32px;">Listar Clientes</h1>
+      <h1 style="font-size: 32px;">Listar Pedidos do Cliente</h1>
       
       <div class="search-bar">
-        <input type="text" placeholder="Buscar cliente...">
+        <input type="text" placeholder="Buscar por Cliente...">
         <button class="btn btn-secondary">Buscar</button>
       </div>
       
@@ -649,110 +649,43 @@
         <thead>
           <tr>
             <th>Id</th>
-            <th>Nome</th>
-            <th>Razão Social</th>
-            <th>Empresa</th>
-            <th>Documento</th>
-            <th>Telefone</th>
-            <th>Email</th>
-            <th style="text-align: center;">Ações</th>
+            <th>Data Pedido</th>
+            <th>Valor Total</th>
+            <th>Status</th>
+            <th>Cliente</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>1</td>
-            <td>Ana Silva</td>
-            <td>Razão Social 1</td>
-            <td>Empresa 1</td>
-            <td>123.456.789-00</td>
-            <td>(11) 97654-3210</td>
-            <td>ana.silva@empresa.com</td>
+            <td>15/03/2024</td>
+            <td>R$ 5.500,00</td>
+            <td>Pendente</td>
+            <td>Rações Ouro</td>
             <td class="action-cell">
-              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
               <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
               <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
             </td>
           </tr>
           <tr>
             <td>2</td>
-            <td>Ana Silva</td>
-            <td>Razão Social 1</td>
-            <td>Empresa 1</td>
-            <td>123.456.789-00</td>
-            <td>(11) 97654-3210</td>
-            <td>ana.silva@empresa.com</td>
+            <td>14/03/2024</td>
+            <td>R$ 3.200,00</td>
+            <td>Aprovado</td>
+            <td>Rações Ouro</td>
             <td class="action-cell">
-              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
               <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
               <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
             </td>
           </tr>
           <tr>
             <td>3</td>
-            <td>Ana Silva</td>
-            <td>Razão Social 1</td>
-            <td>Empresa 1</td>
-            <td>123.456.789-00</td>
-            <td>(11) 97654-3210</td>
-            <td>ana.silva@empresa.com</td>
+            <td>12/03/2024</td>
+            <td>R$ 8.900,00</td>
+            <td>Entregue</td>
+            <td>Rações Ouro</td>
             <td class="action-cell">
-              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
-              <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
-              <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
-            </td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Ana Silva</td>
-            <td>Razão Social 1</td>
-            <td>Empresa 1</td>
-            <td>123.456.789-00</td>
-            <td>(11) 97654-3210</td>
-            <td>ana.silva@empresa.com</td>
-            <td class="action-cell">
-              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
-              <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
-              <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
-            </td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Ana Silva</td>
-            <td>Razão Social 1</td>
-            <td>Empresa 1</td>
-            <td>123.456.789-00</td>
-            <td>(11) 97654-3210</td>
-            <td>ana.silva@empresa.com</td>
-            <td class="action-cell">
-              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
-              <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
-              <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
-            </td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>Ana Silva</td>
-            <td>Razão Social 1</td>
-            <td>Empresa 1</td>
-            <td>123.456.789-00</td>
-            <td>(11) 97654-3210</td>
-            <td>ana.silva@empresa.com</td>
-            <td class="action-cell">
-              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
-              <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
-              <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
-            </td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>Ana Silva</td>
-            <td>Razão Social 1</td>
-            <td>Empresa 1</td>
-            <td>123.456.789-00</td>
-            <td>(11) 97654-3210</td>
-            <td>ana.silva@empresa.com</td>
-            <td class="action-cell">
-              <button class="action-btn eye-btn" title="Visualizar"><i class="fa fa-eye"></i></button>
               <button class="action-btn edit-btn" title="Editar"><i class="fas fa-pen"></i></button>
               <button class="action-btn delete-btn" title="Remover"><i class="fas fa-trash"></i></button>
             </td>
@@ -778,7 +711,7 @@
         <span class="modal-close">&times;</span>
       </div>
       <div class="modal-body">
-        <p>Deseja excluir a(o) cliente <span id="deleteItemId"></span>?</p>
+        <p>Deseja excluir o pedido <span id="deleteItemId"></span>?</p>
       </div>
       <div class="modal-footer">
         <button id="cancelDeleteBtn" class="btn btn-secondary">Cancelar</button>
@@ -878,7 +811,7 @@
           }, 500);
           
           // Alerta de sucesso (seria substituído por uma notificação mais elegante)
-          alert(`Área ${id} excluída com sucesso!`);
+          alert(`Pedido ${id} excluído com sucesso!`);
           
           // Close the modal
           closeDeleteModal();
@@ -902,7 +835,7 @@
         button.addEventListener('click', function() {
           const row = this.closest('tr');
           const id = row.cells[0].textContent;
-          alert(`Editando área: ${id}`);
+          alert(`Editando pedido: ${id}`);
         });
       });
       

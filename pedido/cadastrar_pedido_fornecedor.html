@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<!-- Head section with styles remains exactly the same -->
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fazenda+</title>
-  <!-- Your existing style block remains unchanged -->
+  <!-- Adicionando Font Awesome para os ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     label{
       font-weight: bold;
@@ -257,17 +257,6 @@
       box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
     }
     
-    .checkbox-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .checkbox-group input[type="checkbox"] {
-      width: auto;
-      margin-right: 5px;
-    }
-    
     .btn-container {
       display: flex;
       justify-content: flex-end;
@@ -301,6 +290,15 @@
     .btn-primary:hover {
       background-color: #1b5e20;
     }
+
+    .btn-danger {
+      background-color: var(--error);
+      color: white;
+    }
+    
+    .btn-danger:hover {
+      background-color: #b71c1c;
+    }
     
     @media (max-width: 992px) {
       body {
@@ -320,7 +318,6 @@
   </style>
 </head>
 <body>
-  <!-- Sidebar Menu -->
   <div class="sidebar">
     <div class="sidebar-header">
       <img class="logo" src="../logo.jpg"></img>
@@ -333,7 +330,7 @@
           <span class="arrow">▲</span>
         </div>
         <ul class="submenu">
-          <li><a href="#" class="submenu-item">Editar Funcionario</a></li>
+          <li><a href="#" class="submenu-item">Cadastrar Funcionario</a></li>
           <li><a href="#" class="submenu-item">Listar Funcionario</a></li>
         </ul>
       </li>
@@ -345,7 +342,7 @@
           <span class="arrow">▲</span>
         </div>
         <ul class="submenu">
-          <li><a href="#" class="submenu-item">Editar Fornecedores</a></li>
+          <li><a href="#" class="submenu-item">Cadastrar Fornecedores</a></li>
           <li><a href="#" class="submenu-item">Listar Fornecedores</a></li>
         </ul>
       </li>
@@ -357,19 +354,19 @@
           <span class="arrow">▲</span>
         </div>
         <ul class="submenu">
-          <li><a href="#" class="submenu-item">Editar Cliente</a></li>
+          <li><a href="#" class="submenu-item">Cadastrar Cliente</a></li>
           <li><a href="#" class="submenu-item">Listar Clientes</a></li>
         </ul>
       </li>
       
       <!-- Areas Menu -->
-      <li class="menu-item active">
+      <li class="menu-item">
         <div class="menu-header">
           <span>Areas</span>
           <span class="arrow">▲</span>
         </div>
         <ul class="submenu">
-          <li><a href="#" class="submenu-item active">Editar Area</a></li>
+          <li><a href="#" class="submenu-item">Cadastrar Area</a></li>
           <li><a href="#" class="submenu-item">Listar Areas</a></li>
         </ul>
       </li>
@@ -388,7 +385,7 @@
               <span class="arrow">▲</span>
             </div>
             <ul class="nested-submenu">
-              <li><a href="#" class="submenu-item">Editar Grão</a></li>
+              <li><a href="#" class="submenu-item">Cadastrar Grão</a></li>
               <li><a href="#" class="submenu-item">Listar Grão</a></li>
             </ul>
           </li>
@@ -400,7 +397,7 @@
               <span class="arrow">▲</span>
             </div>
             <ul class="nested-submenu">
-              <li><a href="#" class="submenu-item">Editar Fertilizante</a></li>
+              <li><a href="#" class="submenu-item">Cadastrar Fertilizante</a></li>
               <li><a href="#" class="submenu-item">Listar Fertilizante</a></li>
             </ul>
           </li>
@@ -426,10 +423,10 @@
           <span class="arrow">▲</span>
         </div>
         <ul class="submenu">
-          <li><a href="../pedido/cadastrar_pedido_cliente.html" class="submenu-item">Cadastrar Pedido Cliente</a></li>
-          <li><a href="../pedido/listar_pedido_cliente.html" class="submenu-item">Listar Pedidos Cliente</a></li>
-          <li><a href="../pedido/cadastrar_pedido_fornecedor.html" class="submenu-item">Cadastrar Pedido Fornecedor</a></li>
-          <li><a href="../pedido/listar_pedido_fornecedor.html" class="submenu-item">Listar Pedidos Fornecedor</a></li>
+          <li><a href="cadastrar_pedido_cliente.html" class="submenu-item">Cadastrar Pedido Cliente</a></li>
+          <li><a href="listar_pedido_cliente.html" class="submenu-item">Listar Pedidos Cliente</a></li>
+          <li><a href="cadastrar_pedido_fornecedor.html" class="submenu-item">Cadastrar Pedido Fornecedor</a></li>
+          <li><a href="listar_pedido_fornecedor.html" class="submenu-item">Listar Pedidos Fornecedor</a></li>
         </ul>
       </li>
 
@@ -439,10 +436,11 @@
           <span class="arrow">▲</span>
         </div>
         <ul class="submenu">
-          <li><a href="#" class="submenu-item">Editar Cargo</a></li>
+          <li><a href="#" class="submenu-item">Cadastrar Cargo</a></li>
           <li><a href="#" class="submenu-item">Alocar Cargo</a></li>
         </ul>
       </li>
+
 
       <li class="menu-item">
         <div class="menu-header">
@@ -450,66 +448,137 @@
           <span class="arrow">▲</span>
         </div>
         <ul class="submenu">
-          <li><a href="#" class="submenu-item">Editar Tarefa</a></li>
+          <li><a href="#" class="submenu-item">Cadastrar Tarefa</a></li>
           <li><a href="#" class="submenu-item">Alocar Tarefa</a></li>
         </ul>
       </li>
     </ul>
   </div>
-  
-  <!-- Main Content -->
+
   <div class="main-content">
     <div class="top-bar">
       <div class="breadcrumb">
-        Areas / <span class="breadcrumb-active">Editar Area</span>
+        Pedidos / <span class="breadcrumb-active">Cadastrar Pedido do Fornecedor</span>
       </div>
     </div>
-    
+
     <div class="card">
-      <h1 style="font-size: 32px;">Editar Area</h1>
+      <h1 style="font-size: 32px;">Cadastrar Pedido do Fornecedor</h1>
       
       <form>
         <div class="form-grid">
-          <div class="form-group">
-            <label for="hectares">Hectares *</label>
-            <input type="number" id="hectares" step="0.01" required placeholder="Digite o número de hectares" value="150.75">
-          </div>
+          <h3 class="address-title">Informações do Pedido</h3>
           
           <div class="form-group">
-            <label class="checkbox-label">Em uso?</label>
-            <div class="checkbox-group">
-              <input type="checkbox" id="emUso" checked>
-              <label for="emUso">Sim</label>
-            </div>
+            <label for="fornecedor">Fornecedor *</label>
+            <select id="fornecedor" required>
+              <option value="">Selecione o fornecedor</option>
+              <option value="1">Agro Fertilizantes</option>
+              <option value="2">Sementes Premium</option>
+              <option value="3">Defensivos Agrícolas SA</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="tipo-produto">Tipo de Produto *</label>
+            <select id="tipo-produto" required>
+              <option value="">Selecione o tipo</option>
+              <option value="fertilizante">Fertilizante</option>
+              <option value="defensivo">Defensivo</option>
+              <option value="semente">Semente</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="produto">Produto *</label>
+            <select id="produto" required>
+              <option value="">Selecione o produto</option>
+              <option value="1">NPK 10-10-10</option>
+              <option value="2">Ureia</option>
+              <option value="3">Glifosato</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="quantidade">Quantidade *</label>
+            <input type="number" id="quantidade" required placeholder="Digite a quantidade">
+          </div>
+
+          <div class="form-group">
+            <label for="valor-unitario">Preço Unitário (R$) *</label>
+            <input type="number" step="0.01" id="valor-unitario" required placeholder="15.90">
+          </div>
+
+          <div class="form-group">
+            <label for="valor-total">Valor Total (R$) *</label>
+            <input type="number" step="0.01" id="valor-total" required placeholder="0.00" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="data-pedido">Data do Pedido *</label>
+            <input type="date" id="data-pedido" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="observacoes">Descrição</label>
+            <input type="text" id="observacoes" placeholder="Observações adicionais sobre o pedido">
           </div>
         </div>
         
         <div class="btn-container">
-          <button type="submit" class="btn btn-primary">Atualizar</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
           <button type="button" class="btn btn-secondary">Cancelar</button>
         </div>
       </form>
     </div>
   </div>
-  
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Função para alternar os submenus
       const menuItems = document.querySelectorAll('.menu-item');
-      
       menuItems.forEach(item => {
         const menuHeader = item.querySelector('.menu-header');
         if (menuHeader) {
-          menuHeader.addEventListener('click', function() {
-            item.classList.toggle('expanded');
-            
-            const submenu = this.nextElementSibling;
-            if (submenu && submenu.classList.contains('submenu')) {
+          menuHeader.addEventListener('click', () => {
+            const submenu = item.querySelector('.submenu');
+            if (submenu) {
+              item.classList.toggle('expanded');
               submenu.classList.toggle('open');
             }
           });
         }
       });
+
+      // Cálculo automático do valor total
+      const quantidadeInput = document.getElementById('quantidade');
+      const valorUnitarioInput = document.getElementById('valor-unitario');
+      const valorTotalInput = document.getElementById('valor-total');
+
+      function calcularValorTotal() {
+        const quantidade = parseFloat(quantidadeInput.value) || 0;
+        const valorUnitario = parseFloat(valorUnitarioInput.value) || 0;
+        const valorTotal = quantidade * valorUnitario;
+        valorTotalInput.value = valorTotal.toFixed(2);
+      }
+
+      quantidadeInput.addEventListener('input', calcularValorTotal);
+      valorUnitarioInput.addEventListener('input', calcularValorTotal);
+
+      // Validação da data de previsão de entrega
+      const dataPedidoInput = document.getElementById('data-pedido');
+      const previsaoEntregaInput = document.getElementById('previsao-entrega');
+
+      previsaoEntregaInput.addEventListener('change', function() {
+        const dataPedido = new Date(dataPedidoInput.value);
+        const previsaoEntrega = new Date(this.value);
+
+        if (previsaoEntrega < dataPedido) {
+          alert('A data de previsão de entrega não pode ser anterior à data do pedido!');
+          this.value = '';
+        }
+      });
     });
   </script>
 </body>
-</html>
+</html> 
